@@ -1,13 +1,20 @@
-Callback = function()
-         for i,v in pairs(game:GetService("Workspace"):GetDescendants()) do
-    if v:IsA("ProximityPrompt") then
-        v["HoldDuration"] = 0
-    end
-end
- 
- 
-game:GetService("ProximityPromptService").PromptButtonHoldBegan:Connect(function(v)
-    v["HoldDuration"] = 0
-end) 
+game:GetService("UserInputService").InputBegan:Connect(OnKeyPress)
+
+MoveBackAndForth()
+ end
+}) 
+
+MiscTab:AddButton({
+	Name = "Instant Loot",
+	Callback = function()
+           local ProximityPromptService = game:GetService("ProximityPromptService")
+
+if _G.hold then _G.hold:Disconnect() end
+_G.hold = ProximityPromptService.PromptButtonHoldBegan:Connect(function(prompt)
+    prompt.HoldDuration = 0;
+end)
+
+
+   -- The function that takes place when the button is pressed
    end,
 })
